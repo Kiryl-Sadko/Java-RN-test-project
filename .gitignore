@@ -1,16 +1,36 @@
-# Compiled class file
+# Global .gitignore for monorepo with backend-api (Java) and react-native-app (React Native/Node)
+
+###############################
+# Git-specific files from nested projects
+###############################
+# Ignore nested git configuration files
+backend-api/.gitignore
+backend-api/.gitattributes
+react-native-app/.gitignore
+
+###############################
+# IDE Settings
+###############################
+# Ignore all .idea folders
+**/.idea/
+/.idea/
+
+# VS Code settings
+.vscode/
+
+###############################
+# Java & Backend API Artifacts
+###############################
+
+# Compiled classes, logs, and BlueJ files
 *.class
-
-# Log file
 *.log
-
-# BlueJ files
 *.ctxt
 
-# Mobile Tools for Java (J2ME)
+# Mobile Tools for Java temporary files
 .mtj.tmp/
 
-# Package Files #
+# Package files (archives)
 *.jar
 *.war
 *.nar
@@ -19,6 +39,78 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# JVM crash logs
 hs_err_pid*
 replay_pid*
+
+#####################################
+# Maven, Build, and IDE-specific Files
+#####################################
+
+# Maven target directory (build artifacts)
+target/
+# Track Maven wrapper JAR for backend-api (if located there)
+!backend-api/.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# STS/IDE files
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# NetBeans files
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+###############################
+# React Native / Node Artifacts
+###############################
+
+# Node modules
+node_modules/
+
+# Expo and related build directories
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native iOS/Android keys and provisioning profiles
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro bundler health checks
+.metro-health-check*
+
+# Debug logs
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS system files
+.DS_Store
+*.pem
+
+# Local environment files
+.env*.local
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Example app folder (if applicable)
+app-example
