@@ -1,16 +1,18 @@
-import {ActivityIndicator, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from "react";
-import {fetchProducts} from "@/data/data";
-import {ProductDto} from "@/data/data.type";
+import { ActivityIndicator, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, View, Pressable } from 'react-native';
+import React, { useEffect, useState } from "react";
+import { useRouter } from 'expo-router';
+import { fetchProducts } from "@/data/data";
+import { ProductDto } from "@/data/data.type";
 import CurrencySelector from '@/components/CurrencySelector';
 
 export default function HomeScreen() {
-    const [selectedCurrency, setSelectedCurrency] = useState('USD');
     const [products, setProducts] = useState<ProductDto[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
 
     useEffect(() => {
+        // TODO: change product price based on the selected currency (BE + FE)
         fetchProducts()
             .then((data) => {
                 setProducts(data);
@@ -22,17 +24,20 @@ export default function HomeScreen() {
             });
     }, []);
 
-    const renderItem = ({item}: { item: ProductDto }) => (
-        <View style={styles.itemContainer}>
+    const renderItem = ({ item }: { item: ProductDto }) => (
+        <Pressable
+            onPress={() => router.push(`/orders?productId=${item.id}`)}
+            style={styles.itemContainer}
+        >
             <Text style={styles.itemTitle}>{item.name}</Text>
             <Text style={styles.itemPrice}>${item.price.toFixed(2)}</Text>
-        </View>
+        </Pressable>
     );
 
     if (loading) {
         return (
             <View style={styles.loadingContainer}>
-                <ActivityIndicator size="large"/>
+                <ActivityIndicator size="large" />
             </View>
         );
     }
@@ -48,9 +53,8 @@ export default function HomeScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View>
-                <CurrencySelector/>
+                <CurrencySelector />
             </View>
-
             <FlatList
                 data={products}
                 keyExtractor={(item) => item.id.toString()}

@@ -6,9 +6,13 @@ export interface ProductDto {
 
 export interface OrderDto {
     id: number;
-    productId: number;
-    productName: string;
+    product: ProductDto
+    currency: string;
     timestamp: string; // ISO string
+}
+
+export interface EnrichedOrder extends OrderDto {
+    localPrice: number;
 }
 
 export interface ExchangeRateDto {
