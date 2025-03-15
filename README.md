@@ -8,9 +8,8 @@ Welcome to the SMOP Java + React Native test project! This repository is designe
 - [Backend API](#backend-api)
 - [React Native App](#react-native-app)
 - [Installation](#installation)
-- [Running the Application](#running-the-application)
+- [Running the Project Locally](#running-the-project-locally)
 - [Notes](#notes)
-- [Acknowledgements](#acknowledgements)
 
 ## Overview
 This project consists of:
@@ -50,27 +49,32 @@ The mobile application built with React Native includes:
 - **Order List Screen:** Displays orders for the tapped product.
 - **Currency Selector:** Available on every screen to allow dynamic price conversion using the selected exchange rate.
 
-[//]: # (TODO: Update after implementation)
 ## Installation
 
 ### Prerequisites
 - **Backend:**
     - Java 17 or higher
     - Maven
+    - IntelliJ IDEA (recommended) or any other preferred IDE for Java projects
 - **Mobile:**
-    - Node.js and npm/yarn
-    - Expo CLI (`npm install -g expo-cli`)
-    - Expo Go app on your mobile device or an emulator/simulator
+    - Node.js and npm or yarn
+    - Expo CLI (install with `npm install -g expo-cli`)
+    - Expo Go app on your mobile device, or an emulator/simulator (Android Studio for Android or Xcode for iOS)
 
 ### Setup Instructions
 
+## Running the Project Locally
+**Note:** The root repository is not configured to run the entire project as a single unit. You must run the backend API and the React Native app as separate projects.
+
+- **Backend:** Follow the instructions under the "Backend" Setup Instructions.
+- **Mobile:** Follow the instructions under the "Mobile" Setup Instructions.
+
 #### Backend
-1. Clone the repository and navigate to the `backend` directory:
+1. Navigate to the `backend-api` directory:
     ```bash
-    git clone <repository-url>
-    cd backend
+    cd backend-api
     ```
-2. Configure the database connection in `src/main/resources/application.properties`.
+2. **Note:** The database is pre-configured using H2. The required data is already available in the `data` folder, so no additional configuration is necessary.
 3. Build the project using Maven:
     ```bash
     mvn clean install
@@ -81,9 +85,9 @@ The mobile application built with React Native includes:
     ```
 
 #### Mobile
-1. Navigate to the `mobile` directory:
+1. Navigate to the `react-native-app` directory:
     ```bash
-    cd mobile
+    cd react-native-app
     ```
 2. Install dependencies:
     ```bash
@@ -91,13 +95,13 @@ The mobile application built with React Native includes:
     # or
     yarn install
     ```
-3. Run the React Native application:
+3. **Important:** To connect the React Native app with the backend API, update the API endpoint in the `react-native-app/data/data.ts` file by setting the `IP_ADDRESS` variable to the address of your running backend API.
+4. Run the React Native application:
     ```bash
-    npx react-native run-android
-    # or
-    npx react-native run-ios
+    npx expo start
     ```
+5. Follow the instructions in the terminal to launch the app on the Android, IOS or Web
 
-## Running the Application
-- **Backend:** The API should now be running on `http://localhost:8080` (or the configured port).
-- **Mobile:** Launch the app on your emulator/device. Ensure that the mobile app is configured to connect to your backend API endpoint.
+## Notes
+- The backend API is self-contained with an H2 database and pre-initialized data.
+- The mobile app requires updating the `react-native-app/data/data.ts` file with the correct backend API endpoint.

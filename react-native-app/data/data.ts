@@ -1,6 +1,6 @@
 import {ExchangeRateDto, OrderDto, ProductDto} from "@/data/data.type";
 
-const IP_ADDRESS = '192.168.1.65'
+const IP_ADDRESS = '192.168.1.65' // Update this to point to your running backend API
 const BASE_URL = `http://${IP_ADDRESS}:8080/api/v1`;
 
 /**
